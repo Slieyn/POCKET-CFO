@@ -14,7 +14,7 @@ function getPrismaClient() {
   if (!globalForPrisma.prisma) {
     const adapter = new PrismaPg({
       connectionString,
-      ...(process.env.GENURA_LOCAL_DB === "true" ? { max: 1 } : {}),
+     max: 1,
     });
     globalForPrisma.prisma = new PrismaClient({
       adapter,
