@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none" role="img" aria-labelledby="pcfo-og-title">
+  <title id="pcfo-og-title">POCKET CFO — Know your numbers. Grow your business.</title>
+  <defs>
+    <linearGradient id="pcfo-og-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0a121b"/>
+      <stop offset="0.55" stop-color="#080f16"/>
+      <stop offset="1" stop-color="#05090e"/>
+    </linearGradient>
+    <radialGradient id="pcfo-og-glow" cx="0" cy="0" r="1" gradientTransform="translate(940 80) rotate(135) scale(620)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4c63f0" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#4c63f0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pcfo-og-glow2" cx="0" cy="0" r="1" gradientTransform="translate(210 600) rotate(-45) scale(480)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22c9a6" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#22c9a6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pcfo-og-frame" x1="30" y1="30" x2="1170" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c8cff"/>
+      <stop offset="0.55" stop-color="#4c63f0"/>
+      <stop offset="1" stop-color="#2b39b8"/>
+    </linearGradient>
+    <pattern id="pcfo-og-grid" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0H0v46" stroke="#ffffff" stroke-opacity=".03"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#pcfo-og-bg)"/>
+  <rect width="1200" height="630" fill="url(#pcfo-og-glow)"/>
+  <rect width="1200" height="630" fill="url(#pcfo-og-glow2)"/>
+  <rect width="1200" height="630" fill="url(#pcfo-og-grid)"/>
+  <rect x="28" y="28" width="1144" height="574" rx="14" fill="none" stroke="url(#pcfo-og-frame)" stroke-width="2"/>
+
+  <path d="M104 144 600 62l496 82" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M104 528 600 604l496-76" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M597 306c-46-2.6-85-36-93-85 48 .7 85 35.9 93 85Z"/>
+    <path d="M603 306c46-2.6 85-36 93-85-48 .7-85 35.9-93 85Z"/>
+    <path d="M600 306v-42"/>
+    <path d="M595.6 284.1c-17.8-13.4-33.7-30.8-45.2-49.6"/>
+    <path d="M604.4 284.1c17.8-13.4 33.7-30.8 45.2-49.6"/>
+  </g>
+
+  <text x="600" y="420" text-anchor="middle" fill="#ffffff" font-family="Impact, 'Arial Narrow', 'Arial Black', 'Segoe UI', sans-serif" font-size="126" font-weight="900" letter-spacing="2" textLength="610" lengthAdjust="spacingAndGlyphs">POCKET CFO</text>
+  <text x="600" y="462" text-anchor="middle" fill="#cfd6e4" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="4.6" textLength="430" lengthAdjust="spacing">KNOW YOUR NUMBERS. GROW YOUR BUSINESS</text>
+  <text x="600" y="500" text-anchor="middle" fill="#8fa8ff" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14.5" font-weight="700" letter-spacing="3.4" textLength="500" lengthAdjust="spacing">CASH FLOW · INVOICES · CALENDAR · FUNDING READINESS</text>
+</svg>

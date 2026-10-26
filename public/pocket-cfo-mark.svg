@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="pocket-cfo-mark-title">
+  <title id="pocket-cfo-mark-title">POCKET CFO</title>
+  <defs>
+    <linearGradient id="pcfo-mark-bg" x1="4" y1="0" x2="60" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0d1722"/>
+      <stop offset="1" stop-color="#05090e"/>
+    </linearGradient>
+    <linearGradient id="pcfo-mark-frame" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c8cff"/>
+      <stop offset="0.55" stop-color="#4c63f0"/>
+      <stop offset="1" stop-color="#2b39b8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="15" fill="url(#pcfo-mark-bg)"/>
+  <rect x="3.6" y="3.6" width="56.8" height="56.8" rx="10" fill="none" stroke="url(#pcfo-mark-frame)" stroke-width="1.5"/>
+
+  <path d="M9.8 18.7 32 9.3l22.2 9.4" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M9.8 45.3 32 54.7l22.2-9.4" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g fill="none" stroke="#ffffff" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31.9 41.7c-6.9-.4-12.5-5.3-13.7-12.5 7.1.1 12.6 5.3 13.7 12.5Z"/>
+    <path d="M32.1 41.7c6.9-.4 12.5-5.3 13.7-12.5-7.1.1-12.6 5.3-13.7 12.5Z"/>
+    <path d="M32 41.7v-6.3"/>
+    <path d="M31.4 38.4c-2.7-2.1-5.2-4.8-7-7.7"/>
+    <path d="M32.6 38.4c2.7-2.1 5.2-4.8 7-7.7"/>
+  </g>
+</svg>

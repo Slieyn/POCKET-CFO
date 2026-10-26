@@ -1,0 +1,251 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  OWNER_DRAW
+}
+
+enum DealType {
+  QUOTE
+  INVOICE
+}
+
+enum DealStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  PAID
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum TaskStatus {
+  TODO
+  DONE
+}
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique @db.VarChar(254)
+  name          String       @db.VarChar(100)
+  passwordHash  String       @db.VarChar(255)
+  createdAt     DateTime     @default(now())
+  memberships   Membership[]
+  sessions      Session[]
+  assignedTasks Task[]       @relation("TaskAssignee")
+}
+
+model Business {
+  id           String                 @id @default(cuid())
+  name         String                 @db.VarChar(120)
+  createdAt    DateTime               @default(now())
+  memberships  Membership[]
+  transactions FinancialTransaction[]
+  budget       Budget?
+  customers    Customer[]
+  deals        Deal[]
+  auditEvents  AuditEvent[]
+  integrations Integration[]
+  imports      ImportBatch[]
+  tasks        Task[]
+}
+
+model Membership {
+  id         String   @id @default(cuid())
+  userId     String
+  businessId String
+  role       String   @default("OWNER") @db.VarChar(20)
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, businessId])
+  @@index([businessId, role])
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@index([expiresAt])
+}
+
+model FinancialTransaction {
+  id          String          @id @default(cuid())
+  businessId  String
+  type        TransactionType
+  amountMinor BigInt
+  currency    String          @default("ZAR") @db.Char(3)
+  description String          @db.VarChar(240)
+  category    String          @db.VarChar(80)
+  occurredAt  DateTime
+  customerId  String?
+  dealId      String?
+  source      String          @default("MANUAL") @db.VarChar(20)
+  externalId  String?         @db.VarChar(160)
+  createdById String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  business    Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  customer    Customer?       @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  deal        Deal?           @relation(fields: [dealId], references: [id], onDelete: SetNull)
+
+  @@unique([businessId, externalId])
+  @@index([businessId, occurredAt])
+  @@index([businessId, type, occurredAt])
+  @@index([customerId])
+}
+
+model Budget {
+  id                String   @id @default(cuid())
+  businessId        String   @unique
+  operationsPercent Int      @default(60)
+  reservePercent    Int      @default(20)
+  ownerDrawPercent  Int      @default(20)
+  updatedAt         DateTime @updatedAt
+  business          Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model Customer {
+  id           String                 @id @default(cuid())
+  businessId   String
+  name         String                 @db.VarChar(120)
+  email        String                 @db.VarChar(254)
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  business     Business               @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  deals        Deal[]
+  transactions FinancialTransaction[]
+
+  @@unique([businessId, email])
+  @@index([businessId, name])
+}
+
+model Deal {
+  id           String                 @id @default(cuid())
+  businessId   String
+  customerId   String
+  reference    String                 @db.VarChar(40)
+  type         DealType
+  status       DealStatus             @default(DRAFT)
+  description  String                 @db.VarChar(1000)
+  totalMinor   BigInt
+  currency     String                 @default("ZAR") @db.Char(3)
+  dueAt        DateTime?
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  business     Business               @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  customer     Customer               @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  items        DealItem[]
+  transactions FinancialTransaction[]
+
+  @@unique([businessId, reference])
+  @@index([businessId, createdAt])
+  @@index([customerId, status])
+}
+
+model DealItem {
+  id          String @id @default(cuid())
+  dealId      String
+  description String @db.VarChar(200)
+  quantity    Int
+  unitMinor   BigInt
+  deal        Deal   @relation(fields: [dealId], references: [id], onDelete: Cascade)
+
+  @@index([dealId])
+}
+
+model AuditEvent {
+  id         String   @id @default(cuid())
+  businessId String
+  actorId    String
+  action     String   @db.VarChar(80)
+  recordType String   @db.VarChar(60)
+  recordId   String   @db.VarChar(80)
+  details    Json?
+  createdAt  DateTime @default(now())
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, createdAt])
+  @@index([actorId, createdAt])
+}
+
+model IdempotencyRecord {
+  id         String   @id @default(cuid())
+  businessId String
+  key        String   @db.VarChar(100)
+  response   Json
+  createdAt  DateTime @default(now())
+
+  @@unique([businessId, key])
+  @@index([createdAt])
+}
+
+model Integration {
+  id           String    @id @default(cuid())
+  businessId   String
+  provider     String    @db.VarChar(40)
+  status       String    @default("DISCONNECTED") @db.VarChar(20)
+  config       String?   @db.Text
+  lastTestedAt DateTime?
+  lastSyncedAt DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  business     Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([businessId, provider])
+  @@index([businessId, status])
+}
+
+model ImportBatch {
+  id           String   @id @default(cuid())
+  businessId   String
+  provider     String   @default("BANK_CSV") @db.VarChar(40)
+  fileName     String   @db.VarChar(200)
+  rowsRead     Int
+  rowsImported Int
+  rowsSkipped  Int
+  createdAt    DateTime @default(now())
+  business     Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, createdAt])
+}
+
+model Task {
+  id              String       @id @default(cuid())
+  businessId      String
+  title           String       @db.VarChar(160)
+  notes           String?      @db.VarChar(1000)
+  scheduledFor    DateTime
+  allDay          Boolean      @default(false)
+  durationMinutes Int          @default(30)
+  priority        TaskPriority @default(MEDIUM)
+  status          TaskStatus   @default(TODO)
+  assignedToId    String?
+  createdById     String
+  completedAt     DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  business        Business     @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  assignedTo      User?        @relation("TaskAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+
+  @@index([businessId, scheduledFor])
+  @@index([businessId, status, scheduledFor])
+  @@index([assignedToId, scheduledFor])
+}

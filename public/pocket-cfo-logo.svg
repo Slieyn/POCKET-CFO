@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 660" fill="none" role="img" aria-labelledby="pocket-cfo-logo-title pocket-cfo-logo-desc">
+  <title id="pocket-cfo-logo-title">POCKET CFO</title>
+  <desc id="pocket-cfo-logo-desc">Know your numbers. Grow your business.</desc>
+  <defs>
+    <linearGradient id="pcfo-logo-bg" x1="40" y1="0" x2="480" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0d1722"/>
+      <stop offset="1" stop-color="#05090e"/>
+    </linearGradient>
+    <linearGradient id="pcfo-logo-frame" x1="26" y1="26" x2="494" y2="634" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c8cff"/>
+      <stop offset="0.55" stop-color="#4c63f0"/>
+      <stop offset="1" stop-color="#2b39b8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="520" height="660" rx="26" fill="url(#pcfo-logo-bg)"/>
+  <rect x="26" y="26" width="468" height="608" rx="10" fill="none" stroke="url(#pcfo-logo-frame)" stroke-width="2"/>
+
+  <path d="M64 142 260 62l196 80" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M64 518 260 598l196-80" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g fill="none" stroke="#ffffff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M258 330c-39-2.2-71-30.4-78-72 40 .6 71 30.3 78 72Z"/>
+    <path d="M262 330c39-2.2 71-30.4 78-72-40 .6-71 30.3-78 72Z"/>
+    <path d="M260 330v-36"/>
+    <path d="M256.3 311.3c-15.6-11.7-29.5-27-39.6-43.4"/>
+    <path d="M263.7 311.3c15.6-11.7 29.5-27 39.6-43.4"/>
+  </g>
+
+  <text x="260" y="446" text-anchor="middle" fill="#ffffff" font-family="Impact, 'Arial Narrow', 'Arial Black', 'Segoe UI', sans-serif" font-size="88" font-weight="900" letter-spacing="1.5" textLength="388" lengthAdjust="spacingAndGlyphs">POCKET CFO</text>
+  <text x="260" y="490" text-anchor="middle" fill="#cfd6e4" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13.5" font-weight="700" letter-spacing="3.1" textLength="342" lengthAdjust="spacing">KNOW YOUR NUMBERS. GROW YOUR BUSINESS</text>
+</svg>
